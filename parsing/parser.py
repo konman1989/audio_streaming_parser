@@ -105,13 +105,4 @@ class AlbumsParser:
 parser = AlbumsParser('Tame Impala')
 # parser.to_json()
 # parser.from_seconds('Tame Impala.json', 'Tame Impala_in_seconds.json')
-
-
-# new_data = parser.fetch_albums()
-# # print(new_data)
-# for item in new_data:
-#     for value in item['songs']:
-#
-#         print(value['duration'])
-
-parser.to_json_in_seconds()
+# parser.to_json_in_seconds()

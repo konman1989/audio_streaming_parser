@@ -16,4 +16,3 @@ class TestSongCLass(unittest.TestCase):
     def test_album_raises_error_if_artist_and_album_mismatch(self):
         with self.assertRaises(WrongArtistError):
             self.song3 = Song('s_song2', self.artist1, 2017, 140, self.album2)
-

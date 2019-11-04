@@ -17,4 +17,3 @@ class TestArtistClass(unittest.TestCase):
     def test_property_albums_number(self):
         self.album2 = Album('s_album2', 2018, self.artist1)
         self.assertEqual(self.artist1.albums_number, 2)
-
