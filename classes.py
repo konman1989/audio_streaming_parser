@@ -1,5 +1,4 @@
 import datetime
-from functools import reduce
 
 
 class WrongArtistError(Exception):
@@ -28,7 +27,10 @@ class Artist:
 
 class Album:
 
-    def __init__(self, name: str, year: int, genre: str, artist: Artist):
+    def __init__(
+            self, name: str, year: int,
+            artist: Artist, genre: str = None
+    ):
         self.name = name
         self.year = year
         self.genre = genre
@@ -53,8 +55,11 @@ class Album:
 
 class Song:
 
-    def __init__(self, name: str, artist: Artist, features: list,
-                 year: int, duration: int, album=None):
+    def __init__(
+            self, name: str, artist: Artist,
+            year: int, duration: int, album=None,
+            features: list = None
+    ):
 
         self.name = name
         self.artist = artist
@@ -66,13 +71,29 @@ class Song:
             if self.artist == self.album.artist:
                 self.album.songs.append(self)
             else:
-                raise WrongArtistError
-        except WrongArtistError:
-            print("Album and artist don't match")
+                raise WrongArtistError("Album and artist don't match")
         except AttributeError:
             print('This song is a single')
         self.artist.songs.append(self)
 
     def __repr__(self):
         return self.name
+
+
+if __name__ == '__main__':
+    artist1 = Artist('Steve', 'UK')
+    artist2 = Artist('John', 'USA')
+
+    steve_album1 = Album('s_album1', 2019, artist1)
+    john_album1 = Album('j_album1', 2018, artist2)
+    john_album2 = Album('j_album2', 2017, artist2)
+
+
+    steve_song1 = Song('s_song1', artist1, 2019, 180, steve_album1)
+    steve_song2 = Song('s_song2', artist1, 2019, 220)
+    john_song1 = Song('j_song1', artist2, 2017, 150, john_album1)
+    john_song2 = Song('j_song2', artist2, 2018, 300, john_album2)
+    john_song3 = Song('j_song3', artist2, 2019, 180, john_album1)
+    # # Exception:
+    # steve_song3 = Song('s_song3', artist1, 2019, 210, john_album1)
 
